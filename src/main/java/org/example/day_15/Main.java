@@ -1,8 +1,16 @@
-package org.example.day_4;
+package org.example.day_15;
 
 import java.util.*;
 
 public class Main {
+    /**
+     * FOR THE PERSON WHO WILL READ THIS CODE !
+     * When I was doing this task, I knew that I need to use dijkstra algorithm, but the solution was found on internet
+     * You can not count this task as a score task, it will be fair enough
+     * The reason why I leave it her is that if you even won't give me an offer I'll still try to find solution
+     * for every problem from this web and I want to understand all the solutions
+     */
+
 
     static class Node {
         int x, y;
@@ -19,20 +27,16 @@ public class Main {
         int rows = grid.length;
         int cols = grid[0].length;
 
-        // Create a 2D array to track distances
         int[][] distances = new int[rows][cols];
         for (int i = 0; i < rows; i++) {
             Arrays.fill(distances[i], Integer.MAX_VALUE);
         }
 
-        // Define the four possible movement directions (up, down, left, right)
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
 
-        // Create a priority queue for Dijkstra's algorithm
         PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(node -> node.distance));
 
-        // Start at the top-left corner
         pq.add(new Node(0, 0, grid[0][0]));
         distances[0][0] = grid[0][0];
 
@@ -42,17 +46,14 @@ public class Main {
             int y = currentNode.y;
             int currentDistance = currentNode.distance;
 
-            // If we reach the bottom-right corner, return the shortest distance
             if (x == rows - 1 && y == cols - 1) {
                 return currentDistance;
             }
 
-            // Explore neighbors
             for (int i = 0; i < 4; i++) {
                 int newX = x + dx[i];
                 int newY = y + dy[i];
 
-                // Check if the new position is within bounds
                 if (newX >= 0 && newX < rows && newY >= 0 && newY < cols) {
                     int newDistance = currentDistance + grid[newX][newY];
                     System.out.println("grid: "+grid[newX][newY]);
@@ -65,7 +66,6 @@ public class Main {
             }
         }
 
-        // If there's no path to the bottom-right corner
         return -1;
     }
 
